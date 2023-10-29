@@ -10,10 +10,12 @@ export default function Experience() {
 
   return (
     <>
-      <Grumpkin grumptype={1} position={[-3, 0, 0]} swearingStartPoint={0} />
-      <Grumpkin grumptype={2} position={[-1, 0, 0]} swearingStartPoint={0} />
-      <Grumpkin grumptype={3} position={[1, 0, 0]} swearingStartPoint={0} />
-      <Grumpkin grumptype={4} position={[3, 0, 0]} swearingStartPoint={0} />
+      <Grumpkin
+        grumptype={1}
+        position={[0, 0, 0]}
+        swearingStartPoint={0}
+        // rotation={[0, 0, 0.1]}
+      />
       <OrbitControls
         makeDefault
         minDistance={4}

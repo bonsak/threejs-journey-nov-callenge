@@ -9,6 +9,7 @@ export default function Grumpkin({
   position = [-2, 0, 1],
   textureOffsetX = 0.0,
   swearingStartPoint = 0,
+  rotation = [0, 0, 0],
 }) {
   const [spriteIsPlaying, setSpriteIsPlaying] = useState(false)
   const [pointerOverMesh, setPionterOverMesh] = useState()
@@ -50,9 +51,10 @@ export default function Grumpkin({
   return (
     <>
       <motion.group
+        name='grumpkinGroup'
         scale={[1, 1, 1]}
         position={position}
-        name='grumpkinGroup'
+        rotation={rotation}
         transition={{
           type: 'spring',
           stiffness: 300,
@@ -94,7 +96,7 @@ export default function Grumpkin({
             roughness={0.45}
           />
         </mesh>
-        {/* <SpriteSwearing position={[0, 1, 0]} opacity={0} /> */}
+        <SpriteSwearing position={[0, 1, 0]} opacity={0} />
       </motion.group>
     </>
   )

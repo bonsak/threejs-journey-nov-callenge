@@ -2,10 +2,104 @@ html,
 body,
 #root {
   position: fixed;
+  margin: 0;
   top: 0;
+  bottom: 0;
   left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: rgb(19, 19, 19);
+  background-color: #000239;
+
+  --main-text-color: rgb(255, 174, 0);
+  --main-margin: 24px;
+}
+
+.container {
+  margin: 0;
+  pointer-events: none;
+  font-family: 'Inter';
+  text-transform: uppercase;
+  color: var(--main-text-color);
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  font-weight: 800;
+}
+
+.top-wrapper {
+  margin-top: var(--main-margin);
+}
+.top-text {
+}
+
+.heading {
+  margin-top: 1rem;
+  margin-bottom: -5px;
+  font-size: 8rem;
+  line-height: 1;
+  font-family: 'monsterific-bb', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.subtext {
+  text-transform: none;
+  /* margin-top: 24px; */
+}
+
+.bottom-wrapper {
+  margin-bottom: var(--main-margin);
+}
+
+.selector {
+  /* width: 70vw; */
+  justify-content: space-around;
+  margin-bottom: 55px;
+  display: flex;
+  grid-column-gap: 5px;
+}
+.selector > button {
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+  margin: 0;
+  background-color: #000239;
+}
+
+.button {
+  color: rgba(255, 255, 255, 0.863);
+  text-decoration: none;
+  margin: 1.5rem;
+  padding: 10px;
+  padding-left: 17px;
+  padding-right: 17px;
+  border-radius: 100px;
+  background-color: var(--main-text-color);
+}
+.bottom-text {
+  font-size: 0.75rem;
+}
+
+@media screen and (max-width: 991px) {
+  .heading {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .heading {
+    font-size: 3.5rem;
+  }
 }
