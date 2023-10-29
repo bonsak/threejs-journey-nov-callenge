@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import Experience from './Experience'
 import Loading from './Loading'
 import { Loader, Html, useProgress } from '@react-three/drei'
+import Overlay from './layout/Overlay'
 
 function App() {
   const progress = useProgress
@@ -56,6 +57,7 @@ function App() {
           <Experience />
         </Suspense>
       </Canvas>
+      <Overlay />
     </>
   )
 }
