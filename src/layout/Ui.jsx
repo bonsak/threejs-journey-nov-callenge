@@ -2,6 +2,12 @@ export default function Ui() {
   function handleSelector(event) {
     console.log(event.target.value)
   }
+  const grumpkinNames = [
+    'Harold Grumpkin',
+    'Theodore Grumpkin',
+    'Ebenezer Grumpkin',
+    'Maximillian Grumpkin',
+  ]
   return (
     <div className='container'>
       <div className='top-wrapper'>
@@ -13,18 +19,15 @@ export default function Ui() {
       </div>
       <div className='bottom-wrapper'>
         <div className='selector'>
-          <button onClick={handleSelector} className='button'>
-            Harold Grumpkin
-          </button>
-          <button onClick={handleSelector} className='button'>
-            Theodore Grumpkin
-          </button>
-          <button onClick={handleSelector} className='button'>
-            Ebenezer Grumpkin
-          </button>
-          <button onClick={handleSelector} className='button'>
-            Maximillian Grumpkin
-          </button>
+          {grumpkinNames.map((grumpName) => (
+            <button
+              key={grumpName}
+              className='button'
+              onClick={(event) => console.log(event.target)}
+            >
+              {grumpName}
+            </button>
+          ))}
         </div>
         <button className='button'>SOUND ON</button>
         <div className='bottom-text'>Made by Bonsak 2023</div>
