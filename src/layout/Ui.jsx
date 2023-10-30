@@ -1,12 +1,13 @@
 import useSoundStore from '../stores/useSound'
+import useGrumpkinStore from '../stores/useGrumpkin'
 
 export default function Ui() {
   const { soundIsOn, toggleSound } = useSoundStore()
+  const { grumpkinType, setGrumpkinType } = useGrumpkinStore()
   const grumpkinNames = ['Harold', 'Theodore', 'Ebenezer', 'Maximillian']
 
   const handleSoundToogle = () => {
     toggleSound()
-    // console.log(soundIsOn)
   }
 
   return (
@@ -24,11 +25,14 @@ export default function Ui() {
       </div>
       <div className='bottom-wrapper'>
         <div className='selector'>
-          {grumpkinNames.map((grumpName) => (
+          {grumpkinNames.map((grumpName, index) => (
             <button
+              value={index + 1}
               key={grumpName}
               className='button grumpkinBtn'
-              // onClick={(event) => console.log(event)}
+              onClick={(e) => {
+                setGrumpkinType(e.currentTarget.value)
+              }}
             >
               {grumpName}
             </button>
