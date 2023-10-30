@@ -137,6 +137,9 @@ body,
   cursor: pointer;
   user-select: none;
 }
+.sound-off {
+  background-color: rgba(255, 255, 255, 0.089);
+}
 .bottom-text {
   font-size: 0.75rem;
 }
