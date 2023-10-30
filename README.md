@@ -1,7 +1,8 @@
 ![logo](thumbnail.png)
 # Threejs Journey Halloween challenge
 November 2023
-
+## Published here:
+[The Grumpki](https://grumpkin.surge.sh/)
 ## Credits
 All work by Bonsak Schieldrop except:
 ## Audio and sound fx
