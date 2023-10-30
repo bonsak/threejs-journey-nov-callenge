@@ -1,9 +1,7 @@
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Experience from './Experience'
-import Loading from './Loading'
 import { Loader, Html, useProgress } from '@react-three/drei'
-import Overlay from './layout/Overlay'
 import Ui from './layout/Ui'
 
 function App() {
@@ -28,19 +26,14 @@ function App() {
           position: [0, 1, 4.5],
         }}
       >
-        {/* <fog attach='fog' args={['#f7eded', 0, 20]} /> */}
         <Suspense
           fallback={
             <Html center style={{ backgroundColor: 'black' }}>
               <Loader
                 containerStyles={{
-                  // display: 'flex-box',
-                  // alignItems: 'center',
-                  // justifyContent: 'center',
                   backgroundColor: 'orange',
                 }}
                 innerStyles={{
-                  // textAlign: 'center',
                   backgroundColor: 'yello',
                 }}
                 barStyles={{ backgroundColor: 'orange' }}
