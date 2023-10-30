@@ -63,9 +63,9 @@ export default function Grumpkin({
       y: spriteIsOn ? 0.5 : 0,
     },
     {
-      rotateX: spriteIsOn ? -0.35 : 0,
-      rotateY: spriteIsOn ? Math.PI * 0.1 : 0,
-      z: spriteIsOn ? -1.5 : 0,
+      rotateX: spriteIsOn ? 0.25 : 0,
+      rotateY: spriteIsOn ? Math.PI * -0.1 : 0,
+      z: spriteIsOn ? 0.5 : 0,
       y: spriteIsOn ? 0.25 : 0,
     },
     {
@@ -75,7 +75,7 @@ export default function Grumpkin({
       y: spriteIsOn ? 0.5 : 0,
     },
     {
-      rotateX: spriteIsOn ? -0.35 : 0,
+      rotateX: spriteIsOn ? -0.25 : 0,
       rotateY: spriteIsOn ? Math.PI * 0.1 : 0,
       y: spriteIsOn ? 0.65 : 0,
     },
@@ -98,7 +98,7 @@ export default function Grumpkin({
     },
     {
       type: 'spring',
-      stiffness: 150,
+      stiffness: 250,
       damping: spriteIsOn ? 10 : 35,
     },
   ]
