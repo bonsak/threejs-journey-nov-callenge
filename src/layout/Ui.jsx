@@ -4,7 +4,6 @@ import useGrumpkinStore from '../stores/useGrumpkin'
 export default function Ui() {
   const { soundIsOn, toggleSound } = useSoundStore()
   const { grumpkinType, setGrumpkinType } = useGrumpkinStore()
-  const grumpkinNames = ['Harold', 'Theodore', 'Ebenezer', 'Maximillian']
   const grumpkins = [
     { gName: 'Harold', active: false },
     { gName: 'Theodore', active: false },
@@ -16,12 +15,8 @@ export default function Ui() {
     if (parseInt(grumpkinType) === index + 1) {
       grumpkin.active = true
     }
-    console.log(index + 1, grumpkin.gName, grumpkin.active)
+    // console.log(index + 1, grumpkin.gName, grumpkin.active)
   })
-
-  const handleSoundToogle = () => {
-    toggleSound()
-  }
 
   return (
     <div className='container'>
@@ -44,20 +39,16 @@ export default function Ui() {
                 value={index + 1}
                 key={grumpkin.gName}
                 onClick={(e) => setGrumpkinType(e.currentTarget.value)}
-                className={
-                  grumpkin.active
-                    ? 'button grumpkinBtn active'
-                    : 'button grumpkinBtn'
-                }
+                className={grumpkin.active ? 'button activeGrump' : 'button'}
               >
                 {grumpkin.gName}
               </button>
             )
           })}
-          {grumpkinType}
+          {/* {grumpkinType} */}
         </div>
         <button
-          onClick={handleSoundToogle}
+          onClick={toggleSound}
           className={!soundIsOn ? 'button sound sound-off' : 'button sound'}
         >
           {!soundIsOn ? 'SOUND ON' : 'SOUND OFF'}

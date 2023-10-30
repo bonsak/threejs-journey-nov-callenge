@@ -106,13 +106,13 @@ body,
   cursor: pointer;
   user-select: none;
   margin: 0;
-  background-color: rgb(27, 31, 75);
+  background-color: rgba(255, 255, 255, 0.103);
   text-decoration: none;
   border-radius: 100px;
 }
 
-.active {
-  color: green;
+.button.activeGrump {
+  background-color: rgb(27, 31, 75);
 }
 /* .selectGrumpkin {
   font-size: 1.6rem;

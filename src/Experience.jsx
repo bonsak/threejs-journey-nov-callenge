@@ -1,15 +1,16 @@
-import { useState } from 'react'
-
 import { OrbitControls, Environment } from '@react-three/drei'
 import Ground from './Ground'
 import Grumpkin from './Grumpkin'
 import Lights from './Lights'
+import useGrumpkinStore from './stores/useGrumpkin'
 
 export default function Experience() {
+  const { grumpkinType, setGrumpkinType } = useGrumpkinStore()
+
   return (
     <>
       <Grumpkin
-        grumptype={1}
+        grumptype={grumpkinType}
         position={[0, 0, 0]}
         swearingStartPoint={0}
         // rotation={[0, 0, 0.1]}
