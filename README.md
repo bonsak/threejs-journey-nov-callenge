@@ -1,5 +1,5 @@
+[](./thumbnail.png)
 # Threejs Journey Halloween challenge
-
 November 2023
 
 ## Credits
