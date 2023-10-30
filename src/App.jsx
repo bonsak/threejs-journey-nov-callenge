@@ -16,11 +16,10 @@ function App() {
         gl={
           {
             // antialias: false
-            // toneMapping: THREE.ACESFilmicToneMapping
+            // toneMapping: THREE.ACESFilmicToneMapping,
             // outputEncoding: THREE.LinearEncoding
           }
         }
-        // orthographic
         camera={{
           fov: 85,
           // zoom: 90,

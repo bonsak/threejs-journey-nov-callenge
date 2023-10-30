@@ -2,10 +2,21 @@ import { OrbitControls, Environment } from '@react-three/drei'
 import Ground from './Ground'
 import Grumpkin from './Grumpkin'
 import Lights from './Lights'
+import useSoundStore from './stores/useSound'
 import useGrumpkinStore from './stores/useGrumpkin'
 
+const contentum = new Audio('./audio/contentum.mp3')
+contentum.loop = true
+
 export default function Experience() {
+  const { soundIsOn, toggleSound } = useSoundStore()
   const { grumpkinType, setGrumpkinType } = useGrumpkinStore()
+
+  if (soundIsOn) {
+    contentum.play()
+  } else {
+    contentum.pause()
+  }
 
   return (
     <>
@@ -13,7 +24,6 @@ export default function Experience() {
         grumptype={grumpkinType}
         position={[0, 0, 0]}
         swearingStartPoint={0}
-        // rotation={[0, 0, 0.1]}
       />
       <OrbitControls
         makeDefault
@@ -25,9 +35,6 @@ export default function Experience() {
       />
       <Environment
         files='./textures/env-v01.hdr'
-        // preset='city'
-        // background={false}
-        // intensity={0.1}
         ground={{
           height: 10,
           radius: 50,

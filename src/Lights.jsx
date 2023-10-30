@@ -13,7 +13,7 @@ export default function Lights() {
       <spotLight
         name='key-left'
         position={[-5, 4, 3]}
-        intensity={30}
+        intensity={50}
         color={new THREE.Color('rgb(200, 152, 245)')}
         castShadow
         penumbra={0.5}

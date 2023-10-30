@@ -12,7 +12,7 @@ body,
   overflow: hidden;
   background-color: #000239;
 
-  --main-text-color: rgb(223, 152, 0);
+  --main-text-color: rgb(241, 165, 0);
   --sub-text-color: rgba(calc(var(--main-text-color)), 0.548);
   --main-margin: 24px;
 }
@@ -112,23 +112,12 @@ body,
 }
 
 .button.activeGrump {
-  background-color: rgb(27, 31, 75);
+  background-color: rgb(38, 43, 105);
 }
-/* .selectGrumpkin {
-  font-size: 1.6rem;
-  font-family: 'monsterific-bb', sans-serif;
-  outline: none;
-  pointer-events: auto;
-  cursor: pointer;
-  user-select: none;
-  margin: 0;
-  background-color: rgb(27, 31, 75);
-  text-decoration: none;
-  border-radius: 100px;
-} */
-
 .button {
   color: rgba(255, 255, 255, 0.863);
+  font-size: 1.6rem;
+  font-family: 'monsterific-bb', sans-serif;
   text-decoration: none;
   margin: 1.5rem;
   padding: 10px;

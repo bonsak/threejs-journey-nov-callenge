@@ -1,21 +1,29 @@
 import { useGLTF, useTexture, SpriteAnimator } from '@react-three/drei'
 import * as THREE from 'three'
 import Swearing from './Swearing'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion-3d'
 import useSpriteStore from './stores/useSprite'
+import useSoundStore from './stores/useSound'
 
 export default function Grumpkin({
   grumptype = 1,
   position = [-2, 0, 1],
   swearingStartPoint = 0,
-  rotation = [0, 0, 0],
 }) {
+  const { soundIsOn, toggleSound } = useSoundStore()
   const { spriteIsOn, toggleSprite } = useSpriteStore()
-  // const [spriteIsPlaying, setSpriteIsPlaying] = useState(false)
-  const [pointerOverMesh, setPionterOverMesh] = useState()
+  // const [pointerOverMesh, setPionterOverMesh] = useState()
+
+  const [hovered, setHovered] = useState(false)
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto'
+    return () => (document.body.style.cursor = 'auto')
+  }, [hovered])
 
   const { nodes } = useGLTF('./models/grumpkins-v07.glb')
+  const grumpRef = useRef()
 
   const grumpkin_color_texture = useTexture(
     './textures/grumpkin-texture-v03-desat.jpg'
@@ -32,6 +40,68 @@ export default function Grumpkin({
   ao_02.flipY = false
   ao_03.flipY = false
   ao_04.flipY = false
+
+  const grumpScream = [
+    new Audio('./audio/scream-01.mp3'),
+    new Audio('./audio/scream-02.mp3'),
+    new Audio('./audio/scream-05.mp3'),
+    new Audio('./audio/scream-04.mp3'),
+  ]
+
+  const grumpkinColors = [
+    new THREE.Color('rgb(255, 220, 67)'),
+    new THREE.Color('rgb(216, 255, 179)'),
+    new THREE.Color('rgb(174, 203, 255)'),
+    new THREE.Color('rgb(204, 129, 255)'),
+  ]
+
+  const animConfig = [
+    {
+      rotateX: spriteIsOn ? 0.2 : 0,
+      rotateY: spriteIsOn ? Math.PI * 0.1 : 0,
+      z: spriteIsOn ? 0.35 : 0,
+      y: spriteIsOn ? 0.5 : 0,
+    },
+    {
+      rotateX: spriteIsOn ? -0.35 : 0,
+      rotateY: spriteIsOn ? Math.PI * 0.1 : 0,
+      z: spriteIsOn ? -1.5 : 0,
+      y: spriteIsOn ? 0.25 : 0,
+    },
+    {
+      rotateX: spriteIsOn ? -0.5 : 0,
+      rotateY: spriteIsOn ? Math.PI * -0.1 : 0,
+      rotateZ: spriteIsOn ? 0.75 : 0,
+      y: spriteIsOn ? 0.5 : 0,
+    },
+    {
+      rotateX: spriteIsOn ? -0.35 : 0,
+      rotateY: spriteIsOn ? Math.PI * 0.1 : 0,
+      y: spriteIsOn ? 0.65 : 0,
+    },
+  ]
+  const dampingConfig = [
+    {
+      type: 'spring',
+      stiffness: 300,
+      damping: spriteIsOn ? 10 : 35,
+    },
+    {
+      type: 'spring',
+      stiffness: 300,
+      damping: spriteIsOn ? 10 : 35,
+    },
+    {
+      type: 'spring',
+      stiffness: 600,
+      damping: spriteIsOn ? 10 : 35,
+    },
+    {
+      type: 'spring',
+      stiffness: 150,
+      damping: spriteIsOn ? 10 : 35,
+    },
+  ]
 
   const SpriteSwearing = ({ spriteRef, position, texture, json }) => {
     return (
@@ -53,25 +123,26 @@ export default function Grumpkin({
       />
     )
   }
+
+  const variants = {
+    start: { scale: 1, duration: 0.2 },
+    hover: { scale: 1.1, duration: 0.2 },
+  }
+
+  function handleAudio() {
+    if (soundIsOn) {
+      grumpScream[grumptype - 1].play()
+    }
+  }
+
   return (
     <>
       <motion.group
         name='grumpkinGroup'
         scale={[1, 1, 1]}
         position={position}
-        rotation={rotation}
-        transition={{
-          type: 'spring',
-          stiffness: 300,
-          damping: spriteIsOn ? 10 : 35,
-        }}
-        animate={{
-          rotateX: spriteIsOn ? -0.35 : 0,
-          rotateY: spriteIsOn ? Math.PI * 0.1 : 0,
-          y: spriteIsOn ? 0.5 : 0,
-        }}
-        // whileHover={() => console.log('hover')}
-        // whileTap={() => console.log('tap')}
+        transition={dampingConfig[grumptype - 1]}
+        animate={animConfig[grumptype - 1]}
       >
         <Swearing
           opacity={spriteIsOn ? 1 : 0}
@@ -84,14 +155,15 @@ export default function Grumpkin({
           castShadow={true}
           receiveShadow={true}
           position={[0, 1, 0]}
-          intensity={25}
+          intensity={spriteIsOn ? 100 : 25}
           color='#e97100'
         />
         <mesh
-          onPointerOver={() => setPionterOverMesh(true)}
-          onPointerOut={() => setPionterOverMesh(false)}
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
           onClick={() => {
             toggleSprite(true)
+            handleAudio()
           }}
           castShadow
           geometry={nodes[`grumpkin_0${grumptype}`].geometry}
@@ -99,7 +171,7 @@ export default function Grumpkin({
           <meshStandardMaterial
             map={grumpkin_color_texture}
             aoMap={ao_01}
-            color={new THREE.Color('rgb(255, 163, 255)')}
+            color={grumpkinColors[grumptype - 1]}
             roughness={0.45}
           />
         </mesh>

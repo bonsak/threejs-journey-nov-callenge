@@ -2,6 +2,8 @@ import useSoundStore from '../stores/useSound'
 import useGrumpkinStore from '../stores/useGrumpkin'
 import useSpriteStore from '../stores/useSprite'
 
+import { motion } from 'framer-motion'
+
 export default function Ui() {
   const { soundIsOn, toggleSound } = useSoundStore()
   const { spriteIsOn, toggleSprite } = useSpriteStore()
@@ -10,8 +12,8 @@ export default function Ui() {
   const grumpkins = [
     { gName: 'Harold', active: false },
     { gName: 'Theodore', active: false },
-    { gName: 'Ebenezer', active: false },
     { gName: 'Maximillian', active: false },
+    { gName: 'Ebenezer', active: false },
   ]
 
   grumpkins.map((grumpkin, index) => {
@@ -38,7 +40,11 @@ export default function Ui() {
         <div className='selector'>
           {grumpkins.map((grumpkin, index) => {
             return (
-              <button
+              <motion.button
+                whileHover={{
+                  scale: 1.15,
+                }}
+                whileTap={{ scale: 0.9 }}
                 disabled={spriteIsOn}
                 value={index + 1}
                 key={grumpkin.gName}
@@ -46,17 +52,21 @@ export default function Ui() {
                 className={grumpkin.active ? 'button activeGrump' : 'button'}
               >
                 {grumpkin.gName}
-              </button>
+              </motion.button>
             )
           })}
           {/* {grumpkinType} */}
         </div>
-        <button
+        <motion.button
+          whileHover={{
+            scale: 1.15,
+          }}
+          whileTap={{ scale: 0.9 }}
           onClick={toggleSound}
           className={!soundIsOn ? 'button sound sound-off' : 'button sound'}
         >
           {!soundIsOn ? 'SOUND ON' : 'SOUND OFF'}
-        </button>
+        </motion.button>
         <div className='bottom-text'>Made by Bonsak 2023</div>
       </div>
     </div>
