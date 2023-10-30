@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import Swearing from './Swearing'
 import { useState } from 'react'
 import { motion } from 'framer-motion-3d'
+import useSpriteStore from './stores/useSprite'
 
 export default function Grumpkin({
   grumptype = 1,
@@ -10,12 +11,12 @@ export default function Grumpkin({
   swearingStartPoint = 0,
   rotation = [0, 0, 0],
 }) {
-  const [spriteIsPlaying, setSpriteIsPlaying] = useState(false)
+  const { spriteIsOn, toggleSprite } = useSpriteStore()
+  // const [spriteIsPlaying, setSpriteIsPlaying] = useState(false)
   const [pointerOverMesh, setPionterOverMesh] = useState()
-  // Load models
+
   const { nodes } = useGLTF('./models/grumpkins-v07.glb')
-  // Load textures
-  // console.log(nodes)
+
   const grumpkin_color_texture = useTexture(
     './textures/grumpkin-texture-v03-desat.jpg'
   )
@@ -32,12 +33,6 @@ export default function Grumpkin({
   ao_03.flipY = false
   ao_04.flipY = false
 
-  // const randomRange = (min, max) => {
-  //   return Math.floor(Math.random() * (max - min + 1)) + min
-  // }
-
-  // const rndXrot = randomRange(-0.35, 0.25)
-
   const SpriteSwearing = ({ spriteRef, position, texture, json }) => {
     return (
       <SpriteAnimator
@@ -49,12 +44,12 @@ export default function Grumpkin({
         scaleFactor={0.125}
         autoPlay={false}
         loop={false}
-        play={spriteIsPlaying}
+        play={spriteIsOn}
         numberOfFrames={24}
         zIndexRange={-1000}
         textureImageURL={'./sprites/pumpkin-sprites-v01.png'}
         textureDataURL={'./sprites/pumpkin-sprites-v01.json'}
-        onEnd={() => setSpriteIsPlaying(false)}
+        onEnd={() => toggleSprite(false)}
       />
     )
   }
@@ -68,18 +63,18 @@ export default function Grumpkin({
         transition={{
           type: 'spring',
           stiffness: 300,
-          damping: spriteIsPlaying ? 10 : 35,
+          damping: spriteIsOn ? 10 : 35,
         }}
         animate={{
-          rotateX: spriteIsPlaying ? -0.35 : 0,
-          rotateY: spriteIsPlaying ? Math.PI * 0.1 : 0,
-          y: spriteIsPlaying ? 0.5 : 0,
+          rotateX: spriteIsOn ? -0.35 : 0,
+          rotateY: spriteIsOn ? Math.PI * 0.1 : 0,
+          y: spriteIsOn ? 0.5 : 0,
         }}
-        whileHover={() => console.log('hover')}
-        whileTap={() => console.log('tap')}
+        // whileHover={() => console.log('hover')}
+        // whileTap={() => console.log('tap')}
       >
         <Swearing
-          opacity={spriteIsPlaying ? 1 : 0}
+          opacity={spriteIsOn ? 1 : 0}
           wireframe
           scale={1.5}
           startPoint={swearingStartPoint}
@@ -96,7 +91,7 @@ export default function Grumpkin({
           onPointerOver={() => setPionterOverMesh(true)}
           onPointerOut={() => setPionterOverMesh(false)}
           onClick={() => {
-            setSpriteIsPlaying(true)
+            toggleSprite(true)
           }}
           castShadow
           geometry={nodes[`grumpkin_0${grumptype}`].geometry}

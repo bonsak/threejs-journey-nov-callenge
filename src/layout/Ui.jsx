@@ -1,9 +1,12 @@
 import useSoundStore from '../stores/useSound'
 import useGrumpkinStore from '../stores/useGrumpkin'
+import useSpriteStore from '../stores/useSprite'
 
 export default function Ui() {
   const { soundIsOn, toggleSound } = useSoundStore()
+  const { spriteIsOn, toggleSprite } = useSpriteStore()
   const { grumpkinType, setGrumpkinType } = useGrumpkinStore()
+
   const grumpkins = [
     { gName: 'Harold', active: false },
     { gName: 'Theodore', active: false },
@@ -36,6 +39,7 @@ export default function Ui() {
           {grumpkins.map((grumpkin, index) => {
             return (
               <button
+                disabled={spriteIsOn}
                 value={index + 1}
                 key={grumpkin.gName}
                 onClick={(e) => setGrumpkinType(e.currentTarget.value)}
