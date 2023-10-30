@@ -42,10 +42,10 @@ export default function Grumpkin({
   ao_04.flipY = false
 
   const grumpScream = [
-    new Audio('./audio/scream-01.mp3'),
-    new Audio('./audio/scream-02.mp3'),
-    new Audio('./audio/scream-05.mp3'),
-    new Audio('./audio/scream-04.mp3'),
+    new Audio('./audio/212764__qubodup__lion-roar.mp3'),
+    new Audio('./audio/435651__wakerone__zombie-demon-scream.mp3'),
+    new Audio('./audio/442816__qubodup__goblin-scream.mp3'),
+    new Audio('./audio/618483__foleyhaven__piglet_squeal_01.mp3'),
   ]
 
   const grumpkinColors = [
