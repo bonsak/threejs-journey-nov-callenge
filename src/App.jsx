@@ -22,11 +22,11 @@ function App() {
         }
         // orthographic
         camera={{
-          fov: 65,
+          fov: 85,
           // zoom: 90,
           near: 0.1,
           far: 200,
-          position: [0, 1, 7],
+          position: [0, 1, 4.5],
         }}
       >
         {/* <fog attach='fog' args={['#f7eded', 0, 20]} /> */}

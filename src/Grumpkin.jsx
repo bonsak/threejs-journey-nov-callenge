@@ -7,20 +7,30 @@ import { motion } from 'framer-motion-3d'
 export default function Grumpkin({
   grumptype = 1,
   position = [-2, 0, 1],
-  textureOffsetX = 0.0,
   swearingStartPoint = 0,
   rotation = [0, 0, 0],
 }) {
   const [spriteIsPlaying, setSpriteIsPlaying] = useState(false)
   const [pointerOverMesh, setPionterOverMesh] = useState()
   // Load models
-  const { nodes } = useGLTF('./models/grumpkins-v04.glb')
+  const { nodes } = useGLTF('./models/grumpkins-v07.glb')
   // Load textures
+  // console.log(nodes)
   const grumpkin_color_texture = useTexture(
-    './textures/grumpkin-texture-v03.jpg'
+    './textures/grumpkin-texture-v03-desat.jpg'
   )
   grumpkin_color_texture.flipY = false
-  grumpkin_color_texture.offset = new THREE.Vector2(textureOffsetX, 0)
+
+  const [ao_01, ao_02, ao_03, ao_04] = useTexture([
+    './textures/grumpkin_01_AO.jpg',
+    './textures/grumpkin_02_AO.jpg',
+    './textures/grumpkin_03_AO.jpg',
+    './textures/grumpkin_04_AO.jpg',
+  ])
+  ao_01.flipY = false
+  ao_02.flipY = false
+  ao_03.flipY = false
+  ao_04.flipY = false
 
   // const randomRange = (min, max) => {
   //   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -65,6 +75,8 @@ export default function Grumpkin({
           rotateY: spriteIsPlaying ? Math.PI * 0.1 : 0,
           y: spriteIsPlaying ? 0.5 : 0,
         }}
+        whileHover={() => console.log('hover')}
+        whileTap={() => console.log('tap')}
       >
         <Swearing
           opacity={spriteIsPlaying ? 1 : 0}
@@ -77,7 +89,7 @@ export default function Grumpkin({
           castShadow={true}
           receiveShadow={true}
           position={[0, 1, 0]}
-          intensity={10}
+          intensity={25}
           color='#e97100'
         />
         <mesh
@@ -85,14 +97,14 @@ export default function Grumpkin({
           onPointerOut={() => setPionterOverMesh(false)}
           onClick={() => {
             setSpriteIsPlaying(true)
-            // console.log(`Grump${grumptype}`)
           }}
           castShadow
           geometry={nodes[`grumpkin_0${grumptype}`].geometry}
         >
           <meshStandardMaterial
             map={grumpkin_color_texture}
-            color={new THREE.Color('rgb(187, 255, 0)')}
+            aoMap={ao_01}
+            color={new THREE.Color('rgb(255, 163, 255)')}
             roughness={0.45}
           />
         </mesh>
