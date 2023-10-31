@@ -20,7 +20,6 @@ export default function Ui() {
     if (parseInt(grumpkinType) === index + 1) {
       grumpkin.active = true
     }
-    // console.log(index + 1, grumpkin.gName, grumpkin.active)
   })
 
   return (
