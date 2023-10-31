@@ -138,12 +138,32 @@ body,
 
 @media screen and (max-width: 991px) {
   .heading {
-    font-size: 4rem;
+    font-size: 5rem;
   }
 }
 
 @media screen and (max-width: 767px) {
   .heading {
-    font-size: 3.5rem;
+    font-size: 3.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .subtext {
+    font-size: 1rem;
+    /* margin: 16px; */
+    margin-top: 0px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .selector {
+    margin-bottom: 4px;
+    grid-column-gap: 5px;
+  }
+  .selector > button {
+    font-size: 1.2rem;
+  }
+  .button.sound {
+    font-size: 1.2rem;
+    margin: 12px;
+    /* margin-bottom: 35px; */
   }
 }

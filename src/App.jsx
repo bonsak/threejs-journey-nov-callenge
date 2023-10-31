@@ -23,7 +23,7 @@ function App() {
           // zoom: 90,
           near: 0.1,
           far: 200,
-          position: [0, 1, 4.5],
+          position: [0, 1, 4.7],
         }}
       >
         <Suspense
